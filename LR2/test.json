@@ -3,15 +3,15 @@
     "Bus": {
       "Bus1_1": { "name": "Bus1_1", "connections": ["QF1", "QF2", "QF5", "QF6"], "voltage": "750" },
       "Bus1_2": { "name": "Bus1_2", "connections": ["QF3", "QF4", "QF5", "QF7"], "voltage": "750" },
-      "Bus2_1": { "name": "Bus2_1", "connections": ["QF10", "QF11", "QF14", "QF8"], "voltage": "330" },
-      "Bus2_2": { "name": "Bus2_2", "connections": ["QF12", "QF13", "QF9", "QF14"], "voltage": "330" }
+      "Bus2_1": { "name": "Bus2_1", "connections": ["QF10", "QF11", "QF8"], "voltage": "330" },
+      "Bus2_2": { "name": "Bus2_2", "connections": ["QF12", "QF13", "QF9", "QF11"], "voltage": "330" }
     },
     "Line": {
       "W1": { "name": "W1", "connections": ["QF1"], "voltage": "750" },
       "W2": { "name": "W2", "connections": ["QF2"], "voltage": "750" },
       "W3": { "name": "W3", "connections": ["QF3"], "voltage": "750" },
       "W4": { "name": "W4", "connections": ["QF4"], "voltage": "750" },
-      "W5": { "name": "W5", "connections": ["QF10", "QF13"], "voltage": "330" },
+      "W5": { "name": "W5", "connections": ["QF10"], "voltage": "330" },
       "W6": { "name": "W6", "connections": ["QF11"], "voltage": "330" },
       "W7": { "name": "W7", "connections": ["QF12"], "voltage": "330" }
     },
@@ -21,25 +21,39 @@
     }
   },
   "CircuitBreaker": {
-    "QF1": { "name": "QF1", "connections": ["W1"] },
-    "QF10": { "name": "QF10", "connections": ["W5"] },
-    "QF11": { "name": "QF11", "connections": ["W6"] },
-    "QF12": { "name": "QF12", "connections": ["W7"] },
-    "QF13": { "name": "QF13", "connections": ["W5"] },
-    "QF14": { "name": "QF14", "connections": ["Bus1_1", "Bus1_2"], "is_on": "False" },
-    "QF2": { "name": "QF2", "connections": ["W2"] },
-    "QF3": { "name": "QF3", "connections": ["W3"] },
-    "QF4": { "name": "QF4", "connections": ["W4"] },
-    "QF5": { "name": "QF5", "connections": ["Bus2_1", "Bus2_2"], "is_on": "False" },
-    "QF6": { "name": "QF6", "connections": ["AT1_750_330"] },
-    "QF7": { "name": "QF7", "connections": ["AT2_750_330"] },
-    "QF8": { "name": "QF8", "connections": ["AT1_750_330"] },
-    "QF9": { "name": "QF9", "connections": ["AT2_750_330"] }
+    "QF1": { "name": "QF1" },
+    "QF10": { "name": "QF10" },
+    "QF11": { "name": "QF11" },
+    "QF12": { "name": "QF12" },
+    "QF13": { "name": "QF13", "is_on": "False" },
+    "QF2": { "name": "QF2" },
+    "QF3": { "name": "QF3" },
+    "QF4": { "name": "QF4" },
+    "QF5": { "name": "QF5", "is_on": "False" },
+    "QF6": { "name": "QF6" },
+    "QF7": { "name": "QF7" },
+    "QF8": { "name": "QF8" },
+    "QF9": { "name": "QF9" }
   },
   "Faults": {
-    "OnePhaseFault": { "probability": "0.7", "self_extinct": "0.4"},
-    "ThreePhaseFault": { "probability": "0.1", "self_extinct": "0.05"},
-    "TwoPhaseFault": { "probability": "1", "self_extinct": "0"},
-    "TurnToTurnFault": { "probability": "0.2", "self_extinct": "0.2"}
+    "OnePhaseFault": { "probability": "0.7", "self_extinct": "0.4" },
+    "ThreePhaseFault": { "probability": "0.1", "self_extinct": "0.05" },
+    "TwoPhaseFault": { "probability": "0.2", "self_extinct": "0.2" },
+    "TurnToTurnFault": { "probability": "1", "self_extinct": "0" }
+  },
+  "Protection": {
+    "Bus1_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "Bus1_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "Bus2_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "Bus2_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W3": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W4": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W5": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W6": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "W7": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "AT1 750/330": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "AT2 750/330": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" }
   }
 }
