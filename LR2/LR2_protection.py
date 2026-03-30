@@ -1,4 +1,6 @@
 from LR2_equipment import Equipment, Bus, CircuitBreaker
+from LR2_logger import logger
+import time
 import random
 
 class Protection:
@@ -40,20 +42,18 @@ class Protection:
     def trip(self):
         if self.__element.get_current() < self.__pickup_current and random.random() < self.__main_prob:
             self.send_command()
-
-            print(f"Сработала защита, переключены выключатели:")
-
+            time.sleep(0.1)
+            logger.info(f"Сработала основная защита, переключены выключатели:")
         elif random.random() < self.__backup_prob:
             self.send_command()
-
-            print("Сработала резервная защита, переключены выключатели:")
-
+            time.sleep(0.3)
+            logger.info("Сработала резервная защита, переключены выключатели:")
         else:
+            time.sleep(0.3)
+            logger.warning("Защита не сработала")
 
-            print("Ничего не сработало, не переключены выключатели: ")
-
-        for qf in self.__element.get_connections():
-            print(qf)
+        qf_list = [qf for qf in self.__element.get_connections()]
+        logger.info(', '.join(map(str, qf_list)))
 
     def __repr__(self):
         return (f"{self.__class__.__name__} name={self.get_name()}, main_prob={self.get_main_prob()}, backup_prob={self.get_backup_prob()}, element={self.get_element()},"

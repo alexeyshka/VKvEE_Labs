@@ -1,4 +1,4 @@
-from LR2_equipment import Equipment
+from LR2_logger import logger
 import random
 
 class Faults:
@@ -25,7 +25,7 @@ class Faults:
             self.__target.set_current(self.get_current())
             self.__target.set_validity()
         else:
-            print("КЗ погасло")
+            logger.info("КЗ было самоустранено")
 
     # Геттер и сеттер атрибута current наследуемых классов, в которых они переопределены
     def get_current(self):
