@@ -1,10 +1,11 @@
 class Equipment:
     __registry = {}
-    def __init__(self, name, connections=None, voltage=None, is_valid=True):
+    def __init__(self, name, connections=None, voltage=None, is_valid=True, current=None):
         self.__connections = [] if connections is None else connections
         self.__name = name
         self.__voltage = voltage
         self.__is_valid = is_valid
+        self.__current = current
         Equipment.__registry[name] = self
 
     @classmethod
@@ -20,12 +21,17 @@ class Equipment:
         return self.__is_valid
     def get_connections(self):
         return self.__connections
+    def get_current(self):
+        return self.__current
 
     def set_validity(self):
         self.__is_valid = not self.__is_valid
+    def set_current(self, current):
+        self.__current = current
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(name={self.get_name()}, voltage={self.get_voltage()}, connections={self.get_connections()}, is_valid={self.get_is_valid()})"
+        return (f"{self.__class__.__name__}(name={self.get_name()}, voltage={self.get_voltage()},"
+                f"connections={self.get_connections()}, is_valid={self.get_is_valid()}, current={self.get_current()})")
 
 class Transformer(Equipment):
     pass

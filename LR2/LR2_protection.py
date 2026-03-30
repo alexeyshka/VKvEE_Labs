@@ -1,12 +1,14 @@
 from LR2_equipment import Equipment, Bus, CircuitBreaker
+import random
 
 class Protection:
-    def __init__(self, name, main_prob, backup_prob, element=None, pickup_current=None):
+    def __init__(self, name, main_prob, backup_prob, element=None, pickup_current=None, backup_current=None):
         self.__name = name
-        self.__main_prob = main_prob
-        self.__backup_prob = backup_prob
+        self.__main_prob = float(main_prob)
+        self.__backup_prob = float(backup_prob)
         self.__element = element
         self.__pickup_current = pickup_current
+        self.__backup_current = backup_current
 
     def get_name(self):
         return self.__name
@@ -18,16 +20,41 @@ class Protection:
         return self.__element
     def get_pickup_current(self):
         return self.__pickup_current
+    def get_backup_current(self):
+        return self.__backup_current
 
     def connect(self, element):
         self.__element = element
-        self.__pickup_current = 800 if element.get_voltage() == 330 else 400
+        if element.get_voltage() == 330:
+            self.__pickup_current = 40
+            self.__backup_current = 30
+        else:
+            self.__pickup_current = 24
+            self.__backup_current = 18
 
-    def trip(self):
+    def send_command(self):
         for qf in self.__element.get_connections():
             CircuitBreaker.get_by_name(qf).switch()
-            self.__element.set_validity()
-        return
+        self.__element.set_validity()
+
+    def trip(self):
+        if self.__element.get_current() < self.__pickup_current and random.random() < self.__main_prob:
+            self.send_command()
+
+            print(f"Сработала защита, переключены выключатели:")
+
+        elif random.random() < self.__backup_prob:
+            self.send_command()
+
+            print("Сработала резервная защита, переключены выключатели:")
+
+        else:
+
+            print("Ничего не сработало, не переключены выключатели: ")
+
+        for qf in self.__element.get_connections():
+            print(qf)
 
     def __repr__(self):
-        return f"{self.__class__.__name__} name={self.get_name()}, main_prob={self.get_main_prob()}, backup_prob={self.get_backup_prob()}, element={self.get_element()})"
+        return (f"{self.__class__.__name__} name={self.get_name()}, main_prob={self.get_main_prob()}, backup_prob={self.get_backup_prob()}, element={self.get_element()},"
+                f"pickup_current={self.get_pickup_current()}, backup_current={self.get_backup_current()})")

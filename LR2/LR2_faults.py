@@ -3,8 +3,8 @@ import random
 
 class Faults:
     def __init__(self, probability, self_extinct, target=None):
-        self.__probability = probability
-        self.__self_extinct = self_extinct
+        self.__probability = float(probability)
+        self.__self_extinct = float(self_extinct)
         self.__target = target
         self.base_current = None
 
@@ -19,8 +19,13 @@ class Faults:
     # определяющий величину тока КЗ в зависимости от класса напряжения оборудования
     def set_target(self, target):
         self.__target = target
-        self.base_current = 1000 if target.get_voltage() == 330 else 500
+        self.base_current = 50 if target.get_voltage() == 330 else 30
         self._set_current() # Метод наследуемых классов, возвращающий посчитанное значение тока
+        if random.random() > self.__self_extinct:
+            self.__target.set_current(self.get_current())
+            self.__target.set_validity()
+        else:
+            print("КЗ погасло")
 
     # Геттер и сеттер атрибута current наследуемых классов, в которых они переопределены
     def get_current(self):
@@ -39,7 +44,7 @@ class OnePhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.5, self.base_current * 1)
+        self.__current = random.uniform(self.base_current * 0.5, self.base_current * 0.75)
 
 class TwoPhaseFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
@@ -49,7 +54,7 @@ class TwoPhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.8, self.base_current * 1.2)
+        self.__current = random.uniform(self.base_current * 0.75, self.base_current * 1)
 
 class ThreePhaseFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
@@ -59,7 +64,7 @@ class ThreePhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 1.0, self.base_current * 1.5)
+        self.__current = random.uniform(self.base_current * 0.9, self.base_current * 1.2)
 
 class TurnToTurnFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
