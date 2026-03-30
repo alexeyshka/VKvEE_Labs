@@ -40,6 +40,7 @@ class Faults:
 class OnePhaseFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
         super().__init__(probability, self_extinct, target)
+        self.__current = 0
 
     def get_current(self):
         return self.__current

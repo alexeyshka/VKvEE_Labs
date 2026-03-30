@@ -47,7 +47,7 @@ class CircuitBreaker():
     __registry = {}
     def __init__(self, name, is_on=True):
         self.__name = name
-        self.__is_on = is_on
+        self.__is_on = bool(int(is_on))
         CircuitBreaker.__registry[name] = self
 
     # Поскольку словарь registry – атрибут класса, необходим декоратор метода класса

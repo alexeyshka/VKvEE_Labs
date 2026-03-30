@@ -35,25 +35,28 @@ class Protection:
             self.__backup_current = 18
 
     def send_command(self):
+        logger.info(f"Переключены выключатели:")
+        qf_list = []
         for qf in self.__element.get_connections():
             CircuitBreaker.get_by_name(qf).switch()
+            status = "ВКЛ" if CircuitBreaker.get_by_name(qf).get_is_on() else "ОТКЛ"
+            qf_list.append(f"{qf}: {status}")
+        logger.info(', '.join(map(str, qf_list)))
         self.__element.set_validity()
 
     def trip(self):
         if self.__element.get_current() < self.__pickup_current and random.random() < self.__main_prob:
-            self.send_command()
             time.sleep(0.1)
-            logger.info(f"Сработала основная защита, переключены выключатели:")
-        elif random.random() < self.__backup_prob:
+            logger.info(f"Сработала основная защита {self.__name}")
             self.send_command()
+        elif random.random() < self.__backup_prob:
             time.sleep(0.3)
-            logger.info("Сработала резервная защита, переключены выключатели:")
+            logger.info(f"Сработала резервная защита {self.__name}")
+            self.send_command()
         else:
             time.sleep(0.3)
             logger.warning("Защита не сработала")
 
-        qf_list = [qf for qf in self.__element.get_connections()]
-        logger.info(', '.join(map(str, qf_list)))
 
     def __repr__(self):
         return (f"{self.__class__.__name__} name={self.get_name()}, main_prob={self.get_main_prob()}, backup_prob={self.get_backup_prob()}, element={self.get_element()},"

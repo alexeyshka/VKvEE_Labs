@@ -18,8 +18,9 @@ def load_json():
     for class_type, class_items in data.items():
         if class_type == 'Equipment':
             for object_type, object_values in class_items.items():
-                #print(object_type, object_values)
                 for object_data in object_values.items():
+                    # globals() возвращает словарь всех глобальных имен
+                    # передача словаря через оператор ** присваивает значения соответствующи именованным аргументам
                     obj = globals()[object_type](**object_data[1])
                     equipment_list.append(obj)
         elif class_type == 'Faults':

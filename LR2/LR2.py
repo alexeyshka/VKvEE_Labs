@@ -2,8 +2,9 @@ import random
 import time
 from LR2_logger import logger
 from LR2_json import load_json
+from LR2_equipment import CircuitBreaker
 
-# Создание списков с объектами класса оборудования, объектами класса КЗ
+# Создание списков с объектами класса оборудования, класса КЗ, класса выключателей и класса защиты
 eq, sh_c, c_b, pr = load_json()
 
 i = 0
@@ -25,10 +26,21 @@ while i < 10:
 
     # "Привязка" КЗ к оборудованию
     sh_c_type.set_target(faulted_equipment)
-    logger.info(f"Тип КЗ: {sh_c_type.__class__.__name__}; Iкз = {sh_c_type.get_current()}")
+    qf_list = []
 
-    # Если не произошло самопогасания, работает защита
-    if not faulted_equipment.get_is_valid(): pr[num].trip()
+    # Если не произошло самопогасания
+    if not faulted_equipment.get_is_valid():
+        logger.info(f"Тип КЗ: {sh_c_type.__class__.__name__}; Iкз = {sh_c_type.get_current():.3f} кА")
+        # Срабатывание соответствующей защиты
+        pr[num].trip()
+        # Если защита не сработала
+        if not faulted_equipment.get_is_valid():
+            logger.warning(f"Оборудование {faulted_equipment.get_name()} повреждено")
+            faulted_equipment.set_validity() # Возврат к рабочему состоянию для следующей итерации
+        else:
+            # Иначе возврат в исходное состояние выключателей элемента
+            for qf in faulted_equipment.get_connections():
+                CircuitBreaker.get_by_name(qf).switch()
 
     time.sleep(1)
     i += 1

@@ -1,23 +1,23 @@
 {
   "Equipment": {
     "Bus": {
-      "Bus1_1": { "name": "Bus1_1", "connections": ["QF1", "QF2", "QF5", "QF6"], "voltage": "750" },
-      "Bus1_2": { "name": "Bus1_2", "connections": ["QF3", "QF4", "QF5", "QF7"], "voltage": "750" },
-      "Bus2_1": { "name": "Bus2_1", "connections": ["QF10", "QF11", "QF8"], "voltage": "330" },
-      "Bus2_2": { "name": "Bus2_2", "connections": ["QF12", "QF13", "QF9", "QF11"], "voltage": "330" }
+      "Bus1 Section1": { "name": "B1_1", "connections": ["QF1", "QF2", "QF5", "QF6"], "voltage": "750" },
+      "Bus1 Section12": { "name": "B1_2", "connections": ["QF3", "QF4", "QF5", "QF7"], "voltage": "750" },
+      "Bus2 Section11": { "name": "B2_1", "connections": ["QF10", "QF13", "QF8"], "voltage": "330" },
+      "Bus2 Section12": { "name": "B2_2", "connections": ["QF12", "QF13", "QF9", "QF11"], "voltage": "330" }
     },
     "Line": {
-      "W1": { "name": "W1", "connections": ["QF1"], "voltage": "750" },
-      "W2": { "name": "W2", "connections": ["QF2"], "voltage": "750" },
-      "W3": { "name": "W3", "connections": ["QF3"], "voltage": "750" },
-      "W4": { "name": "W4", "connections": ["QF4"], "voltage": "750" },
-      "W5": { "name": "W5", "connections": ["QF10"], "voltage": "330" },
-      "W6": { "name": "W6", "connections": ["QF11"], "voltage": "330" },
-      "W7": { "name": "W7", "connections": ["QF12"], "voltage": "330" }
+      "Line1": { "name": "W1", "connections": ["QF1"], "voltage": "750" },
+      "Line2": { "name": "W2", "connections": ["QF2"], "voltage": "750" },
+      "Line3": { "name": "W3", "connections": ["QF3"], "voltage": "750" },
+      "Line4": { "name": "W4", "connections": ["QF4"], "voltage": "750" },
+      "Line5": { "name": "W5", "connections": ["QF10"], "voltage": "330" },
+      "Line6": { "name": "W6", "connections": ["QF11"], "voltage": "330" },
+      "Line7": { "name": "W7", "connections": ["QF12"], "voltage": "330" }
     },
     "Transformer": {
-      "AT1_750_330": { "name": "AT1 750/330", "connections": ["QF6", "QF8"], "voltage": "750" },
-      "AT2_750_330": { "name": "AT2 750/330", "connections": ["QF7", "QF9"], "voltage": "750" }
+      "Autotransformer1": { "name": "AT1 750/330", "connections": ["QF6", "QF8"], "voltage": "750" },
+      "Autotransformer2": { "name": "AT2 750/330", "connections": ["QF7", "QF9"], "voltage": "750" }
     }
   },
   "CircuitBreaker": {
@@ -25,11 +25,11 @@
     "QF10": { "name": "QF10" },
     "QF11": { "name": "QF11" },
     "QF12": { "name": "QF12" },
-    "QF13": { "name": "QF13", "is_on": "False" },
+    "QF13": { "name": "QF13", "is_on": "0" },
     "QF2": { "name": "QF2" },
     "QF3": { "name": "QF3" },
     "QF4": { "name": "QF4" },
-    "QF5": { "name": "QF5", "is_on": "False" },
+    "QF5": { "name": "QF5", "is_on": "0" },
     "QF6": { "name": "QF6" },
     "QF7": { "name": "QF7" },
     "QF8": { "name": "QF8" },
@@ -42,10 +42,10 @@
     "TurnToTurnFault": { "probability": "1", "self_extinct": "0" }
   },
   "Protection": {
-    "Bus1_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "Bus1_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "Bus2_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "Bus2_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B1_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B1_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B2_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B2_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W3": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
