@@ -6,7 +6,7 @@ class Faults:
         self.__probability = float(probability)
         self.__self_extinct = float(self_extinct)
         self.__target = target
-        self.base_current = None
+        self._base_current = None
 
     def get_probability(self):
         return self.__probability
@@ -19,7 +19,7 @@ class Faults:
     # определяющий величину тока КЗ в зависимости от класса напряжения оборудования
     def set_target(self, target):
         self.__target = target
-        self.base_current = 50 if target.get_voltage() == 330 else 30
+        self._base_current = 50 if target.get_voltage() == 330 else 30
         self._set_current() # Метод наследуемых классов, возвращающий посчитанное значение тока
         if random.random() > self.__self_extinct:
             self.__target.set_current(self.get_current())
@@ -45,7 +45,7 @@ class OnePhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.5, self.base_current * 0.75)
+        self.__current = random.uniform(self._base_current * 0.5, self._base_current * 0.75)
 
 class TwoPhaseFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
@@ -55,7 +55,7 @@ class TwoPhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.75, self.base_current * 1)
+        self.__current = random.uniform(self._base_current * 0.75, self._base_current * 1)
 
 class ThreePhaseFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
@@ -65,7 +65,7 @@ class ThreePhaseFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.9, self.base_current * 1.2)
+        self.__current = random.uniform(self._base_current * 0.9, self._base_current * 1.2)
 
 class TurnToTurnFault(Faults):
     def __init__(self, probability, self_extinct, target=None):
@@ -75,4 +75,4 @@ class TurnToTurnFault(Faults):
     def get_current(self):
         return self.__current
     def _set_current(self):
-        self.__current = random.uniform(self.base_current * 0.4, self.base_current * 0.8)
+        self.__current = random.uniform(self._base_current * 0.4, self._base_current * 0.8)

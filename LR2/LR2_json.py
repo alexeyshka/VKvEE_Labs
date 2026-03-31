@@ -1,5 +1,3 @@
-from Tools.scripts.generate_global_objects import Printer
-
 from LR2_equipment import Equipment, Transformer, CircuitBreaker, Line, Bus
 from LR2_faults import OnePhaseFault, TwoPhaseFault, ThreePhaseFault, TurnToTurnFault
 from LR2_protection import Protection

@@ -42,10 +42,10 @@
     "TurnToTurnFault": { "probability": "1", "self_extinct": "0" }
   },
   "Protection": {
-    "B1_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "B1_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "B2_1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "B2_2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B1_1": { "name": "Siemens", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B1_2": { "name": "Siemens", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B2_1": { "name": "Siemens", "main_prob": "0.6", "backup_prob": "0.8" },
+    "B2_2": { "name": "Siemens", "main_prob": "0.6", "backup_prob": "0.8" },
     "W1": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W2": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W3": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
@@ -53,7 +53,7 @@
     "W5": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W6": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
     "W7": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "AT1 750/330": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" },
-    "AT2 750/330": { "name": "Relematica", "main_prob": "0.6", "backup_prob": "0.8" }
+    "AT1 750/330": { "name": "General Electric", "main_prob": "0.6", "backup_prob": "0.8" },
+    "AT2 750/330": { "name": "General Electric", "main_prob": "0.6", "backup_prob": "0.8" }
   }
 }

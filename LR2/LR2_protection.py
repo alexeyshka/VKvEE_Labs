@@ -4,13 +4,13 @@ import time
 import random
 
 class Protection:
-    def __init__(self, name, main_prob, backup_prob, element=None, pickup_current=None, backup_current=None):
+    def __init__(self, name, main_prob, backup_prob):
         self.__name = name
         self.__main_prob = float(main_prob)
         self.__backup_prob = float(backup_prob)
-        self.__element = element
-        self.__pickup_current = pickup_current
-        self.__backup_current = backup_current
+        self.__element = None
+        self.__pickup_current = None
+        self.__backup_current = None
 
     def get_name(self):
         return self.__name
