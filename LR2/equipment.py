@@ -64,5 +64,5 @@ class CircuitBreaker():
     def switch(self):
         self.__is_on = not self.__is_on
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.__class__.__name__}(name={self.get_name()}, is_on={self.get_is_on()})"

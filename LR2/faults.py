@@ -1,4 +1,4 @@
-from LR2_logger import logger
+from logger import logger
 import random
 
 class Faults:
@@ -34,7 +34,7 @@ class Faults:
         pass
 
     # Метод для вывода всех атрибутов класса
-    def __repr__(self):
+    def __str__(self):
         return f"{self.__class__.__name__}(probability={self.get_probability()}, self_extinct={self.get_self_extinct()}, current={self.get_current()}, target={self.get_target()})"
 
 class OnePhaseFault(Faults):

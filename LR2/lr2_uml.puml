@@ -1,0 +1,146 @@
+ @startuml
+!theme plain
+left to right direction
+
+' Определение стилей
+skinparam class {
+    BackgroundColor white
+    BorderColor black
+    ArrowColor black
+}
+
+' ========== КЛАССЫ ИЗ equipment.py ==========
+
+class Equipment {
+    - __registry : dict
+    - __connections : list
+    - __name : str
+    - __voltage : int
+    - __is_valid : bool
+    - __current : float
+    + __init__(name, connections, voltage, is_valid, current)
+    + {static} get_by_name(name) : Equipment
+    + get_name() : str
+    + get_voltage() : int
+    + get_is_valid() : bool
+    + get_connections() : list
+    + get_current() : float
+    + set_validity()
+    + set_current(current)
+    + __repr__() : str
+}
+
+class Transformer {
+}
+
+class Line {
+}
+
+class Bus {
+}
+
+class CircuitBreaker {
+    - __registry : dict
+    - __name : str
+    - __is_on : bool
+    + __init__(name, is_on)
+    + {static} get_by_name(name)
+    + get_name() : str
+    + get_is_on() : bool
+    + switch()
+    + __repr__() : str
+}
+
+' Наследование Equipment
+Equipment <|-- Transformer
+Equipment <|-- Line
+Equipment <|-- Bus
+
+' ========== КЛАССЫ ИЗ protection.py ==========
+
+class Protection {
+    - __name : str
+    - __main_prob : float
+    - __backup_prob : float
+    - __element : Equipment
+    - __pickup_current : float
+    - __backup_current : float
+    + __init__(name, main_prob, backup_prob, element, pickup_current, backup_current)
+    + get_name() : str
+    + get_main_prob() : float
+    + get_backup_prob() : float
+    + get_element() : Equipment
+    + get_pickup_current() : float
+    + get_backup_current() : float
+    + connect(element)
+    + send_command()
+    + trip()
+    + __repr__() : str
+}
+
+' ========== КЛАССЫ ИЗ LR2_fault.py ==========
+
+class Faults {
+    - __probability : float
+    - __self_extinct : float
+    - __target : Equipment
+    # base_current : float
+    + __init__(probability, self_extinct, target)
+    + get_probability() : float
+    + get_self_extinct() : float
+    + get_target() : Equipment
+    + set_target(target)
+    + get_current() : float
+    # _set_current()
+    + __repr__() : str
+}
+
+class OnePhaseFault {
+    - __current : float
+    + __init__(probability, self_extinct, target)
+    + get_current() : float
+    # _set_current()
+}
+
+class TwoPhaseFault {
+    - __current : float
+    + __init__(probability, self_extinct, target)
+    + get_current() : float
+    # _set_current()
+}
+
+class ThreePhaseFault {
+    - __current : float
+    + __init__(probability, self_extinct, target)
+    + get_current() : float
+    + _set_current()
+}
+
+class TurnToTurnFault {
+    - __current : float
+    + __init__(probability, self_extinct, target)
+    + get_current() : float
+    # _set_current()
+}
+
+' Наследование Faults
+Faults <|-- OnePhaseFault
+Faults <|-- TwoPhaseFault
+Faults <|-- ThreePhaseFault
+Faults <|-- TurnToTurnFault
+
+' ========== СВЯЗИ МЕЖДУ КЛАССАМИ ==========
+
+' Protection использует Equipment (ассоциация)
+Protection -- Equipment : __element\nget_connections()
+
+' Protection использует CircuitBreaker (агрегация)
+Protection ---- CircuitBreaker : switch()
+
+' Faults использует Equipment (ассоциация)
+Faults -- Equipment : __target\nget_voltage()
+
+' Equipment содержит список имен CircutBreaker (почти агрегация))
+Equipment o-- CircuitBreaker : Список\nимен объектов
+
+@enduml

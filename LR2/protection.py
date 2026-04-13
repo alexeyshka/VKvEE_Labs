@@ -1,5 +1,5 @@
-from LR2_equipment import Equipment, Bus, CircuitBreaker
-from LR2_logger import logger
+from equipment import Equipment, Bus, CircuitBreaker
+from logger import logger
 import time
 import random
 
@@ -58,6 +58,6 @@ class Protection:
             logger.warning("Защита не сработала")
 
 
-    def __repr__(self):
+    def __str__(self):
         return (f"{self.__class__.__name__} name={self.get_name()}, main_prob={self.get_main_prob()}, backup_prob={self.get_backup_prob()}, element={self.get_element()},"
                 f"pickup_current={self.get_pickup_current()}, backup_current={self.get_backup_current()})")

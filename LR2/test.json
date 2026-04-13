@@ -1,10 +1,10 @@
 {
   "Equipment": {
     "Bus": {
-      "Bus1 Section1": { "name": "B1_1", "connections": ["QF1", "QF2", "QF5", "QF6"], "voltage": "750" },
-      "Bus1 Section12": { "name": "B1_2", "connections": ["QF3", "QF4", "QF5", "QF7"], "voltage": "750" },
-      "Bus2 Section11": { "name": "B2_1", "connections": ["QF10", "QF13", "QF8"], "voltage": "330" },
-      "Bus2 Section12": { "name": "B2_2", "connections": ["QF12", "QF13", "QF9", "QF11"], "voltage": "330" }
+      "Bus1_Section11": { "name": "B1_1", "connections": ["QF1", "QF2", "QF5", "QF6"], "voltage": "750" },
+      "Bus1_Section12": { "name": "B1_2", "connections": ["QF3", "QF4", "QF5", "QF7"], "voltage": "750" },
+      "Bus2_Section11": { "name": "B2_1", "connections": ["QF10", "QF13", "QF8"], "voltage": "330" },
+      "Bus2_Section12": { "name": "B2_2", "connections": ["QF12", "QF13", "QF9", "QF11"], "voltage": "330" }
     },
     "Line": {
       "Line1": { "name": "W1", "connections": ["QF1"], "voltage": "750" },

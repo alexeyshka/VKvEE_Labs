@@ -1,8 +1,8 @@
 import random
 import time
-from LR2_logger import logger
-from LR2_json import load_json
-from LR2_equipment import CircuitBreaker
+from logger import logger
+from json_reader import load_json
+from equipment import CircuitBreaker
 
 # Создание списков с объектами класса оборудования, класса КЗ, класса выключателей и класса защиты
 eq, sh_c, c_b, pr = load_json()

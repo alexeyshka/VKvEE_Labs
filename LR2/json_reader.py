@@ -1,6 +1,6 @@
-from LR2_equipment import Equipment, Transformer, CircuitBreaker, Line, Bus
-from LR2_faults import OnePhaseFault, TwoPhaseFault, ThreePhaseFault, TurnToTurnFault
-from LR2_protection import Protection
+from equipment import Equipment, Transformer, CircuitBreaker, Line, Bus
+from faults import OnePhaseFault, TwoPhaseFault, ThreePhaseFault, TurnToTurnFault
+from protection import Protection
 import json
 
 def load_json():
