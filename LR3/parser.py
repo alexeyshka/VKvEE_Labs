@@ -29,9 +29,10 @@ def scheme_data(filename):
                         nodes.add(parameters['nodes'][i])
         elif class_type == 'solver':
             time_step = class_items["time_step"]
+            time_end = class_items["time_end"]
             elem_name = class_items["element"]
 
-    return len(nodes), len(branches), time_step, elem_name
+    return len(nodes), len(branches), time_step, time_end, elem_name
 
 
 def load_json(filename, n, b, t):

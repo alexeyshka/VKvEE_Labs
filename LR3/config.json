@@ -14,19 +14,14 @@
     },
     "L1": {
       "type" : "inductance",
-      "value" : 0.01,
-      "nodes" : [2, 3],
+      "value" : 0.0001,
+      "nodes" : [2, 0],
       "branch" : 2
-    },
-    "C1": {
-      "type" : "capacitance",
-      "value" : 0.00001,
-      "nodes" : [3, 0],
-      "branch" : 3
     }
   },
   "solver": {
     "time_step": 1e-6,
+    "time_end": 1e-3,
     "element" : "R1"
   }
 }
