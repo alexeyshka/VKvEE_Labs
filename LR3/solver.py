@@ -21,7 +21,7 @@ class Solver:
             for element in self.elem_arr: # Перерасчет источников тока для реактивных элементов
                 self.j_b[element.branch] = element.get_J(phi, i)
             j_n = -self.a @ self.j_b # Вектор-столбец "узловых" токов (отрицательный знак для истории)
-            phi = np.linalg.inv(self.g_n) @ j_n # Расчет потенциалов по МУП
+            phi = np.linalg.inv(self.g_n) @ j_n# Расчет потенциалов по МУП
             i = g_b_n @ phi + self.j_b # Расчет токов по второму закону Кирхгофа
             t.append(t_step)
             for element in self.elem_arr:

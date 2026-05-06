@@ -9,14 +9,14 @@ G_n, G_b, J_b, A, elements = load_json("config.json", nodes, branches, time_step
 solution = Solver(G_n, G_b, J_b, A, elements)
 
 U_t, I_t, time = solution.solve(time_step, 0.05, element_name)
+
 #region
 U_t = [U*1e13 for U in U_t]
 I_t = [I*1e13 for I in I_t]
-#endregion
-
 fig, ax = plt.subplots(figsize=(10, 6))
-
 ax.plot(time, U_t)
 plt.tight_layout()
 plt.show()
+#endregion
+
 
