@@ -8,12 +8,13 @@ G_n, G_b, J_b, A, elements = load_json("config.json", nodes, branches, time_step
 # Создается объект решателя
 solution = Solver(G_n, G_b, J_b, A, elements)
 
-U_t, I_t, time = solution.solve(time_step, 0.05, element_name)
+U_t, I_t, time = solution.solve(time_step, 1e-3, element_name)
 
 #region
-U_t = [U*1e13 for U in U_t]
-I_t = [I*1e13 for I in I_t]
+U_t = [U*1e12 for U in U_t]
+I_t = [I*1e12 for I in I_t]
 fig, ax = plt.subplots(figsize=(10, 6))
+ax.grid()
 ax.plot(time, U_t)
 plt.tight_layout()
 plt.show()
