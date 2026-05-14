@@ -3,6 +3,7 @@ import os
 import math
 from comtrade_reader import ComtradeReader
 
+
 class FaultDetector:
 
     def __init__(self, db_path, oscillogram_id):
@@ -28,7 +29,7 @@ class FaultDetector:
         self.cfg_data = info
         self.frequency = info.get('frequency', 50.0)
         self.sampling_rate = 2400.0  # Стандартная частота дискретизации
-        self.channels = self.db.get_channels(self.oscillogram_id) # Каналы файла с осциллограммой
+        self.channels = self.db.get_channels(self.oscillogram_id)  # Каналы файла с осциллограммой
 
         # Определяем наличие токов и напряжений
         self._identify_channels()
@@ -82,8 +83,6 @@ class FaultDetector:
                 self.has_voltage = True
 
     def fourier_filter(self, samples, n_samples):
-        if len(samples) < n_samples:
-            return (0.0, 0.0)
 
         real_part = 0.0
         imag_part = 0.0
@@ -116,9 +115,6 @@ class FaultDetector:
         return results
 
     def calculate_impedance(self, voltage_rms, current_rms):
-        """
-        Расчет сопротивления по напряжениям и токам.
-        """
         impedance = []
         current_dict = {sample_num: rms for sample_num, rms in current_rms}
 
@@ -133,9 +129,6 @@ class FaultDetector:
 
     # Расчет уставки по нормальному режиму (без КЗ).
     def calculate_setting(self, rms_values, is_current=True):
-
-        if not rms_values:
-            return 0.0
 
         normal_samples_count = max(1, len(rms_values) // 10)
         normal_values = [rms for _, rms in rms_values[:normal_samples_count]]
@@ -154,9 +147,6 @@ class FaultDetector:
 
     def detect_fault(self, rms_values, setting, is_current=True):
 
-        if not rms_values or setting <= 0:
-            return (None, None)
-
         fault_start = None
         fault_end = None
 
@@ -174,9 +164,6 @@ class FaultDetector:
         return (fault_start, fault_end)
 
     def sample_to_time(self, sample_number):
-        """
-        Преобразование номера выборки во время в миллисекундах.
-        """
         if self.sampling_rate <= 0:
             return 0.0
 
@@ -184,9 +171,6 @@ class FaultDetector:
         return time_us / 1000.0
 
     def analyze(self):
-        """
-        Полный анализ осциллограммы для определения времени начала и окончания КЗ.
-        """
         result = {
             'oscillogram_id': self.oscillogram_id,
             'has_current': self.has_current,
@@ -237,14 +221,10 @@ class FaultDetector:
                     current_by_sample[sample_num] = []
                 current_by_sample[sample_num].append(rms)
 
-            avg_voltage_rms = [
-                (sample_num, sum(values) / len(values))
-                for sample_num, values in voltage_by_sample.items()
-            ]
-            avg_current_rms = [
-                (sample_num, sum(values) / len(values))
-                for sample_num, values in current_by_sample.items()
-            ]
+            avg_voltage_rms = [(sample_num, sum(values) / len(values)) for sample_num, values in
+                               voltage_by_sample.items()]
+            avg_current_rms = [(sample_num, sum(values) / len(values)) for sample_num, values in
+                               current_by_sample.items()]
 
             impedance = self.calculate_impedance(avg_voltage_rms, avg_current_rms)
 
