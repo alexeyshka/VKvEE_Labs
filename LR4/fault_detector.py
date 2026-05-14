@@ -1,14 +1,14 @@
 import sys
 import os
 import math
-from comtrade_db import ComtradeDatabase
+from comtrade_reader import ComtradeReader
 
 class FaultDetector:
 
     def __init__(self, db_path, oscillogram_id):
         self.db_path = db_path
         self.oscillogram_id = oscillogram_id
-        self.db = ComtradeDatabase(db_path)
+        self.db = ComtradeReader(db_path)
         self.cfg_data = {}
         self.channels = []
         self.samples_data = {}
